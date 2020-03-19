@@ -1,0 +1,16 @@
+{
+    "name": "node-red-contrib-pilot-things",
+    "version": "1.0.0",
+    "description": "Provides Node-RED nodes for Pilot Things interoperability",
+    "author": "Charles Milette",
+    "license": "MIT",
+    "node-red": {
+        "nodes": {
+            "send-data": "send-data.js"
+        }
+    },
+    "dependencies": {
+        "base-64": "^0.1.0",
+        "node-fetch": "^2.6.0"
+    }
+}

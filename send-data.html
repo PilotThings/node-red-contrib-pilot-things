@@ -1,0 +1,143 @@
+<script type="text/javascript">
+    function validateJson(json) {
+        try {
+            JSON.parse(json);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    RED.nodes.registerType("send-data", {
+        category: "pilot things",
+        color: "#f05622",
+        defaults: {
+            endpoint: { value: "" },
+            deviceid: { value: "" },
+            connectivity: { value: "LORA" },
+            metadata: { value: "", validate: validateJson },
+            name: { value:"" }
+        },
+        credentials: {
+            username: { type:"text" },
+            password: { type:"password" }
+        },
+        inputs: 1,
+        inputLabels: "payload", 
+        outputs: 0,
+        icon: "db.png",
+        label: function() {
+            return this.name || "send data";
+        },
+        labelStyle: function() {
+            return this.name ? "node_label_italic" : "";
+        },
+        oneditprepare: function() {
+            $("#node-input-metadata").typedInput({
+                default: "json",
+                types: ["json"]
+            });
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="send-data">
+    <div class="form-row node-input-basic-row">
+        <label for="node-input-endpoint"><i class="fa fa-globe"></i> Endpoint</label>
+        <input type="text" id="node-input-endpoint">
+    </div>
+    <div class="form-row node-input-basic-row">
+        <label for="node-input-username"><i class="fa fa-user"></i> Username</label>
+        <input type="text" id="node-input-username">
+    </div>
+    <div class="form-row">
+        <label for="node-input-password"> <i class="fa fa-lock"></i> Password</label>
+        <input type="password" id="node-input-password">
+    </div>
+    <div class="form-row node-input-basic-row">
+        <label for="node-input-deviceid"><i class="fa fa-lightbulb-o"></i> Device ID</label>
+        <input type="text" id="node-input-deviceid">
+    </div>
+    <div class="form-row">
+        <label for="node-input-connectivity"><i class="fa fa-plug"></i> Connectivity</label>
+        <select type="text" id="node-input-connectivity" style="width:70%;">
+            <option value="LORA">LoRa</option>
+            <option value="SIGFOX">Sigfox</option>
+            <option value="CELLULAR">Cellular</option>
+            <option value="ETHERNET">Ethernet</option>
+            <option value="WIFI">Wi-Fi</option>
+            <option value="BLUETOOTH">Bluetooth</option>
+            <option value="BACNET">BACnet</option>
+            <option value="MODBUS">Modbus</option>
+            <option value="IO_ANALOG">Analog IO</option>
+            <option value="IO_DIGITAL">Digital IO</option>
+            <option value="ENOCEAN">EnOcean</option>
+            <option value="ZIGBEE">ZigBee</option>
+            <option value="ZWAVE">Z-Wave</option>
+            <option value="NFC">NFC</option>
+            <option value="USB">USB</option>
+            <option value="IEEE_LR_WPAN">LR-WPAN</option>
+            <option value="DALI">DALI</option>
+            <option value="UNKNOWN">Unknown</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-metadata"><i class="fa fa-envelope"></i> Metadata</label>
+        <input type="text" id="node-input-metadata" style="width:70%">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="send-data">
+    <p>Sends the payload to a Pilot Things device.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">string | buffer</span>
+            <dd>The data to send to Pilot Things.</dd>
+        </dt>
+    </dl>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>Endpoint
+            <span class="property-type">URL</span>
+            <dd>
+                The address at which an <code>ipe-http</code> endpoint is deployed.<br>
+                <b>Example:</b> <code>http://kerlink.pilot-things.com:8787/</code>
+            </dd>
+        </dt>
+        <dt>Username
+            <span class="property-type">string</span>
+            <dd>The username used for authentication.</dd>
+        </dt>
+        <dt>Password
+            <span class="property-type">string</span>
+            <dd>The password used for authentication.</dd>
+        </dt>
+        <dt>Device ID
+            <span class="property-type">string</span>
+            <dd>The ID of the device for which data is to be sent.</dd>
+        </dt>
+        <dt>Connectivity
+            <span class="property-type">enum</span>
+            <dd>
+                The protocol that was used to get the data.<br>
+                <b>Note:</b> If unsure, set to <code>Unknown</code>.
+            </dd>
+        </dt>
+        <dt>Metadata
+            <span class="property-type">object</span>
+            <dd>
+                Optional information that can be sent with the payload.<br>
+                <b>Note:</b> Set to <code>null</code> if you do not desire to send metadata.
+            </dd>
+        </dt>
+        <dt>Name
+            <span class="property-type">string</span>
+            <dd>The name used by the node in Node-RED flow editor.</dd>
+        </dt>
+    </dl>
+</script>
