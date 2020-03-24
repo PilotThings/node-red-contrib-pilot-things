@@ -1,12 +1,22 @@
 <script type="text/javascript">
     function validateURL(url) {
-        return /^[a-zA-Z][a-zA-Z\d+\-.]*:/.exec(url);
+        // make sure URL is absolute before trying to parse URL
+        if (/^[a-zA-Z][a-zA-Z\d+\-.]*:/.exec(url)) {
+            try {
+                new URL(url);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     function validateJson(json) {
         try {
-            JSON.parse(json);
-            return true;
+            const obj = JSON.parse(json);
+            return typeof obj === "object";
         } catch (e) {
             return false;
         }

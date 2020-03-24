@@ -5,7 +5,9 @@
     "author": "Charles Milette",
     "repository": "https://github.com/PilotThings/node-red-contrib-pilot-things",
     "license": "MIT",
-    "keywords": ["node-red"],
+    "keywords": [
+        "node-red"
+    ],
     "node-red": {
         "nodes": {
             "send-data": "send-data/send-data.js"
@@ -13,8 +15,6 @@
     },
     "dependencies": {
         "base-64": "^0.1.0",
-        "is-object": "^1.0.1",
-        "is-string": "^1.0.5",
         "node-fetch": "^2.6.0"
     }
 }

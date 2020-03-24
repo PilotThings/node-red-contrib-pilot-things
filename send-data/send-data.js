@@ -1,17 +1,15 @@
 const base64 = require("base-64");
-const isObject = require("is-object");
-const isString = require("is-string");
 const fetch = require("node-fetch");
 
 const helpers = require("../helpers.js");
 
 async function sendDataToApi(msg, node, config, done) {
-    if (!isObject(msg.payload)) {
+    if (!helpers.isObject(msg.payload)) {
         done("Invalid payload");
         return;
     }
 
-    if (!isString(msg.payload.deviceId)) {
+    if (!helpers.isString(msg.payload.deviceId)) {
         done("Invalid device ID");
         return;
     }
@@ -24,9 +22,9 @@ async function sendDataToApi(msg, node, config, done) {
 
     if (msg.payload.data instanceof Buffer) {
         body.body = msg.payload.data.toString("hex");
-    } else if (isString(msg.payload.data)) {
+    } else if (helpers.isString(msg.payload.data)) {
         body.body = msg.payload.data;
-    } else if (!msg.payload.data) {
+    } else if (msg.payload.data === undefined) {
         body.body = "";
     } else {
         done("Invalid data");
@@ -35,7 +33,7 @@ async function sendDataToApi(msg, node, config, done) {
 
     if (config.metadata) {
         const metadata = JSON.parse(config.metadata);
-        if (metadata) {
+        if (metadata !== null) {
             body.metadata = metadata;
         }
     }

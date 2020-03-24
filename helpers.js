@@ -20,4 +20,12 @@ async function handleHttpError(result) {
     }
 }
 
-module.exports = { getCompletionHandler, handleHttpError };
+function isString(obj) {
+    return typeof obj === "string" || obj instanceof String;
+}
+
+function isObject(obj) {
+	return typeof obj === "object" && x !== null;
+};
+
+module.exports = { getCompletionHandler, handleHttpError, isString, isObject };
