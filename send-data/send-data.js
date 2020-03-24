@@ -1,17 +1,36 @@
 const base64 = require("base-64");
+const isObject = require("is-object");
+const isString = require("is-string");
 const fetch = require("node-fetch");
 
-async function sendDataToApi(msg, node, config, done) {  
+const helpers = require("../helpers.js");
+
+async function sendDataToApi(msg, node, config, done) {
+    if (!isObject(msg.payload)) {
+        done("Invalid payload");
+        return;
+    }
+
+    if (!isString(msg.payload.deviceId)) {
+        done("Invalid device ID");
+        return;
+    }
+
     const body = {
-        id: config.deviceid,
+        id: msg.payload.deviceId,
         timestamp: new Date().getTime() / 1000,
-        connectivityType: config.connectivity || "UNKNOWN"
+        connectivityType: config.connectivity
     };
 
-    if (msg.payload instanceof Buffer) {
-        body.body = msg.payload.toString("hex");
+    if (msg.payload.data instanceof Buffer) {
+        body.body = msg.payload.data.toString("hex");
+    } else if (isString(msg.payload.data)) {
+        body.body = msg.payload.data;
+    } else if (!msg.payload.data) {
+        body.body = "";
     } else {
-        body.body = msg.payload || "";
+        done("Invalid data");
+        return;
     }
 
     if (config.metadata) {
@@ -21,12 +40,7 @@ async function sendDataToApi(msg, node, config, done) {
         }
     }
 
-    let endpoint = config.endpoint;
-    if (endpoint.endsWith("/")) {
-        endpoint = endpoint.slice(0, -1);
-    }
-
-    const result = await fetch(`${endpoint}/ipe-http/up-link`, {
+    const result = await fetch(config.endpoint, {
         method: "POST",
         headers: {
             Authorization: "Basic " + base64.encode(`${node.credentials.username || ""}:${node.credentials.password || ""}`),
@@ -36,19 +50,7 @@ async function sendDataToApi(msg, node, config, done) {
         body: JSON.stringify(body)
     });
 
-    if (!result.ok) {
-        const basicErr = { status: result.status + " " + result.statusText, url: result.url };
-        try {
-            const err = await result.json();
-            node.error(Object.assign(err, basicErr), msg);
-        } catch (e) {
-            node.error(basicErr, msg);
-        }
-    }
-
-    if (done) {
-        done();
-    }
+    done(await helpers.handleHttpError(result));
 }
 
 module.exports = RED => {
@@ -57,7 +59,7 @@ module.exports = RED => {
     
         const node = this;
         node.on("input", (msg, send, done) => {
-            sendDataToApi(msg, node, config, done);
+            sendDataToApi(msg, node, config, helpers.getCompletionHandler(node, msg, done));
         });
     }
 

@@ -1,4 +1,8 @@
 <script type="text/javascript">
+    function validateURL(url) {
+        return /^[a-zA-Z][a-zA-Z\d+\-.]*:/.exec(url);
+    }
+
     function validateJson(json) {
         try {
             JSON.parse(json);
@@ -12,15 +16,14 @@
         category: "pilot things",
         color: "#f05622",
         defaults: {
-            endpoint: { value: "" },
-            deviceid: { value: "" },
-            connectivity: { value: "LORA" },
-            metadata: { value: "", validate: validateJson },
+            endpoint: { value: "", validate: validateURL },
+            connectivity: { value: "UNKNOWN" },
+            metadata: { value: "null", validate: validateJson },
             name: { value:"" }
         },
         credentials: {
-            username: { type:"text" },
-            password: { type:"password" }
+            username: { type: "text" },
+            password: { type: "password" }
         },
         inputs: 1,
         inputLabels: "payload", 
@@ -54,14 +57,10 @@
         <label for="node-input-password"> <i class="fa fa-lock"></i> Password</label>
         <input type="password" id="node-input-password">
     </div>
-    <div class="form-row node-input-basic-row">
-        <label for="node-input-deviceid"><i class="fa fa-lightbulb-o"></i> Device ID</label>
-        <input type="text" id="node-input-deviceid">
-    </div>
     <div class="form-row">
         <label for="node-input-connectivity"><i class="fa fa-plug"></i> Connectivity</label>
         <select type="text" id="node-input-connectivity" style="width:70%;">
-            <option value="LORA">LoRa</option>
+            <option value="LORA">LoRaWaN</option>
             <option value="SIGFOX">Sigfox</option>
             <option value="CELLULAR">Cellular</option>
             <option value="ETHERNET">Ethernet</option>
@@ -96,8 +95,11 @@
     <h3>Inputs</h3>
     <dl class="message-properties">
         <dt>payload
-            <span class="property-type">string | buffer</span>
-            <dd>The data to send to Pilot Things.</dd>
+            <span class="property-type">{ data?: string | buffer, deviceId: string }</span>
+            <dd>
+                The data (and associated device) to send Pilot Things.<br>
+                <b>Note:</b> Omitting <code>data</code> will result in an empty payload being sent.
+            </dd>
         </dt>
     </dl>
     <h3>Properties</h3>
@@ -105,8 +107,8 @@
         <dt>Endpoint
             <span class="property-type">URL</span>
             <dd>
-                The address at which an <code>ipe-http</code> endpoint is deployed.<br>
-                <b>Example:</b> <code>http://kerlink.pilot-things.com:8787/</code>
+                The address at which to send the data.<br>
+                <b>Example:</b> <code>http://kerlink.pilot-things.com:8787/ipe-http/up-link</code>
             </dd>
         </dt>
         <dt>Username
@@ -116,10 +118,6 @@
         <dt>Password
             <span class="property-type">string</span>
             <dd>The password used for authentication.</dd>
-        </dt>
-        <dt>Device ID
-            <span class="property-type">string</span>
-            <dd>The ID of the device for which data is to be sent.</dd>
         </dt>
         <dt>Connectivity
             <span class="property-type">enum</span>
