@@ -25,7 +25,7 @@ function isString(obj) {
 }
 
 function isObject(obj) {
-	return typeof obj === "object" && x !== null;
+	return typeof obj === "object" && obj !== null;
 };
 
 module.exports = { getCompletionHandler, handleHttpError, isString, isObject };
