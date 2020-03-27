@@ -1,0 +1,11 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+
+[*.{html,js}]
+insert_final_newline = false
+
+[*.json]
+insert_final_newline = true

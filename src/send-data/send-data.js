@@ -36,7 +36,7 @@ async function sendDataToApi(msg, node, config, done) {
 module.exports = RED => {
     function SendDataNode(config) {
         RED.nodes.createNode(this, config);
-    
+
         const node = this;
         node.on("input", (msg, send, done) => {
             sendDataToApi(msg, node, config, redHelpers.getCompletionHandler(node, msg, done));

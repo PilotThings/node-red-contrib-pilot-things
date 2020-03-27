@@ -1,9 +1,9 @@
 function isNumber(obj) {
-	return (typeof obj === "number" || obj instanceof Number) && !isNaN(obj) && isFinite(obj);
+    return (typeof obj === "number" || obj instanceof Number) && !isNaN(obj) && isFinite(obj);
 };
 
 function isObject(obj) {
-	return typeof obj === "object" && obj !== null && !(obj instanceof String);
+    return typeof obj === "object" && obj !== null && !(obj instanceof String);
 };
 
 function isString(obj) {

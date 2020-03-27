@@ -13,7 +13,7 @@ async function decodeDataWithApi(msg, node, config, send, done) {
         return;
     }
 
-    
+
     if (!typeHelpers.isString(msg.payload.productId) || !guidRegex.test(msg.payload.productId)) {
         done("Invalid product ID");
         return;
@@ -48,7 +48,7 @@ async function decodeDataWithApi(msg, node, config, send, done) {
 module.exports = RED => {
     function DecodeDataNode(config) {
         RED.nodes.createNode(this, config);
-    
+
         const node = this;
         node.on("input", (msg, send, done) => {
             decodeDataWithApi(msg, node, config, redHelpers.getSendHandler(node, send), redHelpers.getCompletionHandler(node, msg, done));
