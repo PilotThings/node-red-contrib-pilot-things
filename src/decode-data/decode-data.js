@@ -55,7 +55,7 @@ module.exports = RED => {
         });
     }
 
-    RED.nodes.registerType("decode-data", DecodeDataNode, {
+    RED.nodes.registerType("pilot-things-decode-data", DecodeDataNode, {
         credentials: {
             username: { type: "text" },
             password: { type: "password" }

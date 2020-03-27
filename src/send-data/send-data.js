@@ -43,7 +43,7 @@ module.exports = RED => {
         });
     }
 
-    RED.nodes.registerType("send-data", SendDataNode, {
+    RED.nodes.registerType("pilot-things-send-data", SendDataNode, {
         credentials: {
             username: { type: "text" },
             password: { type: "password" }

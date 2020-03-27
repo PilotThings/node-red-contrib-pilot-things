@@ -1,6 +1,6 @@
 <script type="text/javascript" src="/pilot-things.js"></script>
 <script type="text/javascript">
-    RED.nodes.registerType("decode-data", {
+    RED.nodes.registerType("pilot-things-decode-data", {
         category: pilotThingsNodeCategory,
         color: pilotThingsNodeColor,
         defaults: {
@@ -21,7 +21,7 @@
     });
 </script>
 
-<script type="text/html" data-template-name="decode-data">
+<script type="text/html" data-template-name="pilot-things-decode-data">
     <div class="form-row node-input-basic-row">
         <label for="node-input-endpoint"><i class="fa fa-globe"></i> Endpoint</label>
         <input type="text" id="node-input-endpoint">
@@ -40,14 +40,14 @@
     </div>
 </script>
 
-<script type="text/html" data-help-name="decode-data">
+<script type="text/html" data-help-name="pilot-things-decode-data">
     <p>Decode the payload using a Pilot Things decoder.</p>
     <h3>Inputs</h3>
     <dl class="message-properties">
         <dt>payload
             <span class="property-type">{ timestamp?: number, data?: string | Buffer, metadata?: object, productId: string }</span>
             <dd>
-                The data (and associated device) to decode.<br>
+                The data to decode and the ID of the source product.<br>
                 <b>Note:</b>
                 <ul>
                     <li>Omitting <code>timestamp</code> will result in using the current time as timestamp.</li>

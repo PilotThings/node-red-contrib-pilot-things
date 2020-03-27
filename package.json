@@ -10,8 +10,8 @@
     ],
     "node-red": {
         "nodes": {
-            "decode-data": "src/decode-data/decode-data.js",
-            "send-data": "src/send-data/send-data.js"
+            "pilot-things-decode-data": "src/decode-data/decode-data.js",
+            "pilot-things-send-data": "src/send-data/send-data.js"
         }
     },
     "dependencies": {

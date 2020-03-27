@@ -1,6 +1,6 @@
 <script type="text/javascript" src="/pilot-things.js"></script>
 <script type="text/javascript">
-    RED.nodes.registerType("send-data", {
+    RED.nodes.registerType("pilot-things-send-data", {
         category: pilotThingsNodeCategory,
         color: pilotThingsNodeColor,
         defaults: {
@@ -22,7 +22,7 @@
     });
 </script>
 
-<script type="text/html" data-template-name="send-data">
+<script type="text/html" data-template-name="pilot-things-send-data">
     <div class="form-row node-input-basic-row">
         <label for="node-input-endpoint"><i class="fa fa-globe"></i> Endpoint</label>
         <input type="text" id="node-input-endpoint">
@@ -64,7 +64,7 @@
     </div>
 </script>
 
-<script type="text/html" data-help-name="send-data">
+<script type="text/html" data-help-name="pilot-things-send-data">
     <p>Sends the payload to a Pilot Things device.</p>
     <h3>Inputs</h3>
     <dl class="message-properties">
