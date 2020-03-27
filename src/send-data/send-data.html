@@ -1,34 +1,11 @@
+<script type="text/javascript" src="/pilot-things.js"></script>
 <script type="text/javascript">
-    function validateURL(url) {
-        // make sure URL is absolute before trying to parse URL
-        if (/^[a-zA-Z][a-zA-Z\d+\-.]*:/.exec(url)) {
-            try {
-                new URL(url);
-                return true;
-            } catch (e) {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    function validateJson(json) {
-        try {
-            const obj = JSON.parse(json);
-            return typeof obj === "object";
-        } catch (e) {
-            return false;
-        }
-    }
-
     RED.nodes.registerType("send-data", {
-        category: "pilot things",
-        color: "#f05622",
+        category: pilotThingsNodeCategory,
+        color: pilotThingsNodeColor,
         defaults: {
-            endpoint: { value: "", validate: validateURL },
+            endpoint: { value: "", validate: pilotThingsValidateURL },
             connectivity: { value: "UNKNOWN" },
-            metadata: { value: "null", validate: validateJson },
             name: { value:"" }
         },
         credentials: {
@@ -36,21 +13,12 @@
             password: { type: "password" }
         },
         inputs: 1,
-        inputLabels: "payload", 
         outputs: 0,
         icon: "db.png",
         label: function() {
             return this.name || "send data";
         },
-        labelStyle: function() {
-            return this.name ? "node_label_italic" : "";
-        },
-        oneditprepare: function() {
-            $("#node-input-metadata").typedInput({
-                default: "json",
-                types: ["json"]
-            });
-        }
+        labelStyle: pilotThingsItalicIfName
     });
 </script>
 
@@ -91,10 +59,6 @@
         </select>
     </div>
     <div class="form-row">
-        <label for="node-input-metadata"><i class="fa fa-envelope"></i> Metadata</label>
-        <input type="text" id="node-input-metadata" style="width:70%">
-    </div>
-    <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
@@ -105,10 +69,14 @@
     <h3>Inputs</h3>
     <dl class="message-properties">
         <dt>payload
-            <span class="property-type">{ data?: string | buffer, deviceId: string }</span>
+            <span class="property-type">{ timestamp?: number, data?: string | Buffer, metadata?: object, deviceId: string }</span>
             <dd>
                 The data (and associated device) to send Pilot Things.<br>
-                <b>Note:</b> Omitting <code>data</code> will result in an empty payload being sent.
+                <b>Note:</b>
+                <ul>
+                    <li>Omitting <code>timestamp</code> will result in using the current time as timestamp.</li>
+                    <li>Omitting <code>data</code> will result in an empty payload being sent.</li>
+                </ul>
             </dd>
         </dt>
     </dl>
@@ -134,13 +102,6 @@
             <dd>
                 The protocol that was used to get the data.<br>
                 <b>Note:</b> If unsure, set to <code>Unknown</code>.
-            </dd>
-        </dt>
-        <dt>Metadata
-            <span class="property-type">object</span>
-            <dd>
-                Optional information that can be sent with the payload.<br>
-                <b>Note:</b> Set to <code>null</code> if you do not desire to send metadata.
             </dd>
         </dt>
         <dt>Name

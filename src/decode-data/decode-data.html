@@ -1,0 +1,81 @@
+<script type="text/javascript" src="/pilot-things.js"></script>
+<script type="text/javascript">
+    RED.nodes.registerType("decode-data", {
+        category: pilotThingsNodeCategory,
+        color: pilotThingsNodeColor,
+        defaults: {
+            endpoint: { value: "", validate: pilotThingsValidateURL },
+            name: { value:"" }
+        },
+        credentials: {
+            username: { type: "text" },
+            password: { type: "password" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "split.png",
+        label: function() {
+            return this.name || "decode data";
+        },
+        labelStyle: pilotThingsItalicIfName
+    });
+</script>
+
+<script type="text/html" data-template-name="decode-data">
+    <div class="form-row node-input-basic-row">
+        <label for="node-input-endpoint"><i class="fa fa-globe"></i> Endpoint</label>
+        <input type="text" id="node-input-endpoint">
+    </div>
+    <div class="form-row node-input-basic-row">
+        <label for="node-input-username"><i class="fa fa-user"></i> Username</label>
+        <input type="text" id="node-input-username">
+    </div>
+    <div class="form-row">
+        <label for="node-input-password"> <i class="fa fa-lock"></i> Password</label>
+        <input type="password" id="node-input-password">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="decode-data">
+    <p>Decode the payload using a Pilot Things decoder.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">{ timestamp?: number, data?: string | Buffer, metadata?: object, productId: string }</span>
+            <dd>
+                The data (and associated device) to decode.<br>
+                <b>Note:</b>
+                <ul>
+                    <li>Omitting <code>timestamp</code> will result in using the current time as timestamp.</li>
+                    <li>Omitting <code>data</code> will result in an empty payload being sent.</li>
+                </ul>
+            </dd>
+        </dt>
+    </dl>
+    <h3>Properties</h3>
+    <dl class="message-properties">
+        <dt>Endpoint
+            <span class="property-type">URL</span>
+            <dd>
+                The address at which Pilot Things is installed.<br>
+                <b>Example:</b> <code>https://kerlink.pilot-things.com/</code>
+            </dd>
+        </dt>
+        <dt>Username
+            <span class="property-type">string</span>
+            <dd>The username used for authentication.</dd>
+        </dt>
+        <dt>Password
+            <span class="property-type">string</span>
+            <dd>The password used for authentication.</dd>
+        </dt>
+        <dt>Name
+            <span class="property-type">string</span>
+            <dd>The name used by the node in Node-RED flow editor.</dd>
+        </dt>
+    </dl>
+</script>
