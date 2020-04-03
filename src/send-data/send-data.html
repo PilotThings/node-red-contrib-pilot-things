@@ -23,11 +23,11 @@
 </script>
 
 <script type="text/html" data-template-name="pilot-things-send-data">
-    <div class="form-row node-input-basic-row">
+    <div class="form-row">
         <label for="node-input-endpoint"><i class="fa fa-globe"></i> Endpoint</label>
         <input type="text" id="node-input-endpoint">
     </div>
-    <div class="form-row node-input-basic-row">
+    <div class="form-row">
         <label for="node-input-username"><i class="fa fa-user"></i> Username</label>
         <input type="text" id="node-input-username">
     </div>
@@ -71,9 +71,10 @@
         <dt>payload
             <span class="property-type">{ timestamp?: number, data?: string | Buffer, metadata?: object, deviceId: string }</span>
             <dd>
-                The data (and associated device) to send Pilot Things.<br>
+                The data to send to the specified device on Pilot Things.<br>
                 <b>Note:</b>
                 <ul>
+                    <li>See the <a href="https://github.com/PilotThings/node-red-contrib-pilot-things#faq">FAQ</a> if your data is not in a supported data format.</li>
                     <li>Omitting <code>timestamp</code> will result in using the current time as timestamp.</li>
                     <li>Omitting <code>data</code> will result in an empty payload being sent.</li>
                 </ul>
