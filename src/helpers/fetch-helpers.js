@@ -1,9 +1,3 @@
-const base64 = require("base-64");
-
-function getAuthorizationHeader(credentials) {
-    return "Basic " + base64.encode(`${credentials.username || ""}:${credentials.password || ""}`);
-}
-
 async function handleHttpError(result) {
     if (result.ok) {
         return undefined;
@@ -18,4 +12,4 @@ async function handleHttpError(result) {
     }
 }
 
-module.exports = { getAuthorizationHeader, handleHttpError };
+module.exports = { handleHttpError };
