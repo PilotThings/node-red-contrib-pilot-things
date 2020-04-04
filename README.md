@@ -21,8 +21,8 @@ return msg;
 
 ### The decoder errors with "Too many invalid login attempts"!
 
-Combining the frequent uplink nature of some devices with the auto locking of accounts in Pilot Things after too many unsuccessful attempts can result in your account being locked on the platform by the node. To mitigate this, the node will refuse to try again until one of the following occurs:
+Combining the frequent uplink nature of some devices with the auto locking of accounts in Pilot Things after too many unsuccessful attempts can result in your account being locked on the platform by the node. To mitigate this, the node will stop trying after 5 failed logins in a row and will refuse to try again until one of the following occurs:
 
-- The user credentials have been changed;
+- The credentials used by the node to authenticate with Pilot Things have been changed;
 - 1 hour has passed since the last failed login;
 - The node context has been cleared (this happens upon a restart of the Node-RED server unless it has been configured otherwise).
