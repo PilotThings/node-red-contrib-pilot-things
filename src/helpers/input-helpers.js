@@ -14,7 +14,7 @@ function dataStringToBuffer(data, format, done) {
     } else if (format === "base64") {
         regex = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
     } else if (format === "ascii") {
-        regex = /[\x00-\x7F]+/;
+        regex = /^[\x00-\x7F]+$/;
     } else {
         done("Invalid data format");
         return undefined;
