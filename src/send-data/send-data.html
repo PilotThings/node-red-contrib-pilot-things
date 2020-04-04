@@ -6,6 +6,7 @@
         defaults: {
             endpoint: { value: "", validate: pilotThingsValidateURL },
             connectivity: { value: "UNKNOWN" },
+            format: { value: "hex" },
             name: { value:"" }
         },
         credentials: {
@@ -23,21 +24,30 @@
 </script>
 
 <script type="text/html" data-template-name="pilot-things-send-data">
+    <style>
+        .pilot-things-label {
+            width: 166px !important;
+        }
+
+        .pilot-things-input {
+            width: 50% !important;
+        }
+    </style>
     <div class="form-row">
-        <label for="node-input-endpoint"><i class="fa fa-globe"></i> Endpoint</label>
-        <input type="text" id="node-input-endpoint">
+        <label for="node-input-endpoint" class="pilot-things-label"><i class="fa fa-globe"></i> Endpoint</label>
+        <input type="text" id="node-input-endpoint" class="pilot-things-input">
     </div>
     <div class="form-row">
-        <label for="node-input-username"><i class="fa fa-user"></i> Username</label>
-        <input type="text" id="node-input-username">
+        <label for="node-input-username" class="pilot-things-label"><i class="fa fa-user"></i> Username</label>
+        <input type="text" id="node-input-username" class="pilot-things-input">
     </div>
     <div class="form-row">
-        <label for="node-input-password"> <i class="fa fa-lock"></i> Password</label>
-        <input type="password" id="node-input-password">
+        <label for="node-input-password" class="pilot-things-label"> <i class="fa fa-lock"></i> Password</label>
+        <input type="password" id="node-input-password" class="pilot-things-input">
     </div>
     <div class="form-row">
-        <label for="node-input-connectivity"><i class="fa fa-plug"></i> Connectivity</label>
-        <select type="text" id="node-input-connectivity" style="width:70%;">
+        <label for="node-input-connectivity" class="pilot-things-label"><i class="fa fa-plug"></i> Connectivity</label>
+        <select type="text" id="node-input-connectivity" class="pilot-things-input">
             <option value="LORA">LoRaWaN</option>
             <option value="SIGFOX">Sigfox</option>
             <option value="CELLULAR">Cellular</option>
@@ -59,8 +69,16 @@
         </select>
     </div>
     <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <label for="node-input-format" class="pilot-things-label"><i class="fa fa-file"></i> Data string format</label>
+        <select type="text" id="node-input-format" class="pilot-things-input">
+            <option value="hex">Hexadecimal</option>
+            <option value="base64">Base64</option>
+            <option value="ascii">ASCII</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name" class="pilot-things-label"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name" class="pilot-things-input">
     </div>
 </script>
 
@@ -74,7 +92,6 @@
                 The data to send to the specified device on Pilot Things.<br>
                 <b>Note:</b>
                 <ul>
-                    <li>See the <a href="https://github.com/PilotThings/node-red-contrib-pilot-things#faq">FAQ</a> if your data is not in a supported data format.</li>
                     <li>Omitting <code>timestamp</code> will result in using the current time as timestamp.</li>
                     <li>Omitting <code>data</code> will result in an empty payload being sent.</li>
                 </ul>
@@ -103,6 +120,13 @@
             <dd>
                 The protocol that was used to get the data.<br>
                 <b>Note:</b> If unsure, set to <code>Unknown</code>.
+            </dd>
+        </dt>
+        <dt>Data string format
+            <span class="property-type">enum</span>
+            <dd>
+                The format in which the data is, if it's a string (ignored if the data is a <code>Buffer</code>).<br>
+                <b>Note:</b> See the <a href="https://github.com/PilotThings/node-red-contrib-pilot-things#faq">FAQ</a> if your data is not in a supported format.
             </dd>
         </dt>
         <dt>Name

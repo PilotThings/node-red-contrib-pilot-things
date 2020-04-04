@@ -14,7 +14,7 @@ async function decodeDataWithApi(msg, node, config, send, done) {
         return;
     }
 
-    const body = inputHelpers.payloadToBody(msg.payload, done, true);
+    const body = inputHelpers.payloadToBody(msg.payload, done, true, config.format);
     if (!body) {
         return;
     }

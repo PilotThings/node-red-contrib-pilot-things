@@ -12,10 +12,10 @@ After installing this NPM package in `~/.node-red` and restarting your Node-RED 
 
 ### My data is in a non supported data format! How do I submit it to the Pilot Things nodes?
 
-One can use a function node with 1 output containing the code to convert the input into a format that the Pilot Things nodes will understand. For example, if input is in ASCII, the following code will convert it into a NodeJS `Buffer`, which the Pilot Things nodes understand:
+One can use a function node with 1 output containing the code to convert the input into a format that the Pilot Things nodes will understand. For example, if the input is a byte array, the following code will convert it into a NodeJS `Buffer`, which the Pilot Things nodes understand:
 
 ```js
-msg.payload.data = Buffer.from(msg.payload.data, "ascii");
+msg.payload.data = Buffer.from(msg.payload.data);
 return msg;
 ```
 

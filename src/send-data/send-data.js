@@ -13,7 +13,7 @@ async function sendDataToApi(msg, node, config, done) {
         return;
     }
 
-    const body = inputHelpers.payloadToBody(msg.payload, done, false);
+    const body = inputHelpers.payloadToBody(msg.payload, done, false, config.format);
     if (!body) {
         return;
     }

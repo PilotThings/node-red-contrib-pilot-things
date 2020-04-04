@@ -5,6 +5,7 @@
         color: pilotThingsNodeColor,
         defaults: {
             endpoint: { value: "", validate: pilotThingsValidateURL },
+            format: { value: "hex" },
             name: { value:"" }
         },
         credentials: {
@@ -44,6 +45,14 @@
         <input type="password" id="node-input-password" class="pilot-things-input">
     </div>
     <div class="form-row">
+        <label for="node-input-format" class="pilot-things-label"><i class="fa fa-file"></i> Data string format</label>
+        <select type="text" id="node-input-format" class="pilot-things-input">
+            <option value="hex">Hexadecimal</option>
+            <option value="base64">Base64</option>
+            <option value="ascii">ASCII</option>
+        </select>
+    </div>
+    <div class="form-row">
         <label for="node-input-name" class="pilot-things-label"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name" class="pilot-things-input">
     </div>
@@ -59,7 +68,6 @@
                 The data to decode and the ID of the source product.<br>
                 <b>Note:</b>
                 <ul>
-                    <li>See the <a href="https://github.com/PilotThings/node-red-contrib-pilot-things#faq">FAQ</a> if your data is not in a supported data format.</li>
                     <li>Omitting <code>timestamp</code> will result in using the current time as timestamp.</li>
                     <li>Omitting <code>data</code> will result in an empty payload being sent.</li>
                 </ul>
@@ -82,6 +90,13 @@
         <dt>Password
             <span class="property-type">string</span>
             <dd>The password used for authentication.</dd>
+        </dt>
+        <dt>Data string format
+            <span class="property-type">enum</span>
+            <dd>
+                The format in which the data is, if it's a string (ignored if the data is a <code>Buffer</code>).<br>
+                <b>Note:</b> See the <a href="https://github.com/PilotThings/node-red-contrib-pilot-things#faq">FAQ</a> if your data is not in a supported format.
+            </dd>
         </dt>
         <dt>Name
             <span class="property-type">string</span>
