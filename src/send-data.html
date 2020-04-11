@@ -1,5 +1,7 @@
 <script type="text/javascript" src="/pilot-things.js"></script>
 <script type="text/javascript">
+    var pilotThingsSendData = "Pilot Things send data";
+
     RED.nodes.registerType("pilot-things-send-data", {
         category: pilotThingsNodeCategory,
         color: pilotThingsNodeColor,
@@ -15,11 +17,9 @@
         },
         inputs: 1,
         outputs: 0,
-        icon: "pilot-things.png",
-        paletteLabel: "Pilot Things send data",
-        label: function() {
-            return this.name || "Pilot Things send data";
-        },
+        icon: pilotThingsIcon,
+        paletteLabel: pilotThingsSendData,
+        label: pilotThingsNameOr(pilotThingsSendData),
         labelStyle: pilotThingsItalicIfName
     });
 </script>

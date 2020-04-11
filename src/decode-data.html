@@ -1,5 +1,7 @@
 <script type="text/javascript" src="/pilot-things.js"></script>
 <script type="text/javascript">
+    var pilotThingsDecodeData = "Pilot Things decode data";
+
     RED.nodes.registerType("pilot-things-decode-data", {
         category: pilotThingsNodeCategory,
         color: pilotThingsNodeColor,
@@ -14,11 +16,9 @@
         },
         inputs: 1,
         outputs: 1,
-        icon: "pilot-things.png",
-        paletteLabel: "Pilot Things decode data",
-        label: function() {
-            return this.name || "Pilot Things decode data";
-        },
+        icon: pilotThingsIcon,
+        paletteLabel: pilotThingsDecodeData,
+        label: pilotThingsNameOr(pilotThingsDecodeData),
         labelStyle: pilotThingsItalicIfName
     });
 </script>
