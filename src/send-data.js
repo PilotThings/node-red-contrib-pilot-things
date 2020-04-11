@@ -1,11 +1,11 @@
 const fetch = require("node-fetch");
 const path = require("path");
 
-const credentialsHelpers = require("../helpers/credentials-helpers.js");
-const fetchHelpers = require("../helpers/fetch-helpers.js");
-const inputHelpers = require("../helpers/input-helpers.js")
-const redHelpers = require("../helpers/red-helpers.js");
-const typeHelpers = require("../helpers/type-helpers.js");
+const credentialsHelpers = require("./helpers/credentials-helpers.js");
+const fetchHelpers = require("./helpers/fetch-helpers.js");
+const inputHelpers = require("./helpers/input-helpers.js")
+const redHelpers = require("./helpers/red-helpers.js");
+const typeHelpers = require("./helpers/type-helpers.js");
 
 async function sendDataToApi(msg, node, config, done) {
     if (!(await credentialsHelpers.verifyAuthorizationTimeout(node.credentials, node.context()))) {
@@ -59,5 +59,5 @@ module.exports = RED => {
     });
 
     // setup web
-    RED.httpAdmin.get("/pilot-things.js", (req, res) => res.sendFile(path.join(__dirname, '..', 'web.js')));
+    RED.httpAdmin.get("/pilot-things.js", (req, res) => res.sendFile(path.join(__dirname, "web.js")));
 }
