@@ -24,7 +24,7 @@ Either use the Menu - Manage palette option or run the following command in your
 
 This node sends data to Pilot Things. Pilot Things will automatically create the sensors, and can decode the data after associating the sensor to a product.
 
-This node can be used in a [Kerlink Gateway with SPN](https://www.kerlink.com/iot-portfolio-and-technologies/connectivity-management/wanesy-small-private-network/)
+This node can be used in a [Kerlink Gateway with SPN](https://www.kerlink.com/iot-portfolio-and-technologies/connectivity-management/wanesy-small-private-network/).
 
 See node help for more details.
 
