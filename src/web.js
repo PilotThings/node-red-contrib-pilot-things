@@ -17,4 +17,4 @@ function pilotThingsValidateURL(url) {
 }
 
 var pilotThingsNodeCategory = "pilot things";
-var pilotThingsNodeColor = "#f05622";
+var pilotThingsNodeColor = "#f7a84d";

@@ -1,12 +1,18 @@
 {
     "name": "@pilot-things/node-red-contrib-pilot-things",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "description": "Provides Node-RED nodes for Pilot Things interoperability",
     "author": "Charles Milette",
     "repository": "https://github.com/PilotThings/node-red-contrib-pilot-things",
     "license": "MIT",
     "keywords": [
-        "node-red"
+        "node-red",
+        "IoT",
+        "LoRaWAN",
+        "5G",
+        "sensors",
+        "decode",
+        "Sigfox"
     ],
     "node-red": {
         "nodes": {
