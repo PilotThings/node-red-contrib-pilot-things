@@ -10,9 +10,9 @@ Currently, we offer nodes that allow Node-RED to submit data to the Pilot Things
 
 You need valid Pilot Things credentials to use these nodes.
 
-Sign-up for free at https://www.pilot-things.com/sign-up
+To sign-up for free, please [contact us](https://www.pilot-things.com/contact).
 
-For support go to https://support.pilot-things.com/
+For support go to https://support.pilot-things.com/.
 
 ## Installation
 
@@ -30,7 +30,7 @@ See node help for more details.
 
 ## Decode node usage
 
-The decode node decodes sensor payload to convert it to measurements. You must use a product ID that is a sensor unique ID. For instance product `e6ae04f9-5f57-4992-8bda-41ae5ff0bf8d` is an [Adeunis LoRaWAN Field Test](https://www.adeunis.com/produit/ftd-testeur-de-reseau/).
+The decode node decodes sensor payload to convert it to measurements. You must use a product ID that is a sensor unique ID. For instance product `e6ae04f9-5f57-4992-8bda-41ae5ff0bf8d` is an [Adeunis LoRaWAN Field Test](https://www.adeunis.com/produit/ftd-testeur-de-reseau/). [A full list is available here.](https://www.pilot-things.com/smart-platform/sensor-library)
 
 If you do not have a real sensor you can use the inject node. For instance using the following JSON would decode sample data for a Field Test.
 
