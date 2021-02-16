@@ -1,29 +1,27 @@
 <script type="text/javascript" src="/pilot-things.js"></script>
 <script type="text/javascript">
-    var pilotThingsDecodeData = "Pilot Things decode data";
+    var pilotThingsDecodeDataCloud = "Sensor Library decode data";
 
-    RED.nodes.registerType("pilot-things-decode-data", {
+    RED.nodes.registerType("pilot-things-decode-data-cloud", {
         category: pilotThingsNodeCategory,
         color: pilotThingsNodeColor,
         defaults: {
-            endpoint: { value: "", validate: pilotThingsValidateURL },
             format: { value: "hex" },
             name: { value: "" }
         },
         credentials: {
-            username: { type: "text" },
-            password: { type: "password" }
+            api_key: { type: "text" }
         },
         inputs: 1,
         outputs: 1,
         icon: pilotThingsIcon,
-        paletteLabel: pilotThingsDecodeData,
-        label: pilotThingsNameOr(pilotThingsDecodeData),
+        paletteLabel: pilotThingsDecodeDataCloud,
+        label: pilotThingsNameOr(pilotThingsDecodeDataCloud),
         labelStyle: pilotThingsItalicIfName
     });
 </script>
 
-<script type="text/html" data-template-name="pilot-things-decode-data">
+<script type="text/html" data-template-name="pilot-things-decode-data-cloud">
     <style>
         .pilot-things-label {
             width: 166px !important;
@@ -34,16 +32,8 @@
         }
     </style>
     <div class="form-row">
-        <label for="node-input-endpoint" class="pilot-things-label"><i class="fa fa-globe"></i> Pilot Things instance</label>
-        <input type="text" id="node-input-endpoint" class="pilot-things-input">
-    </div>
-    <div class="form-row">
-        <label for="node-input-username" class="pilot-things-label"><i class="fa fa-user"></i> Username</label>
-        <input type="text" id="node-input-username" class="pilot-things-input">
-    </div>
-    <div class="form-row">
-        <label for="node-input-password" class="pilot-things-label"><i class="fa fa-lock"></i> Password</label>
-        <input type="password" id="node-input-password" class="pilot-things-input">
+        <label for="node-input-api_key" class="pilot-things-label"><i class="fa fa-lock"></i> Sensor Library API key</label>
+        <input type="text" id="node-input-api_key" class="pilot-things-input">
     </div>
     <div class="form-row">
         <label for="node-input-format" class="pilot-things-label"><i class="fa fa-file"></i> Data string format</label>
@@ -59,38 +49,23 @@
     </div>
 </script>
 
-<script type="text/html" data-help-name="pilot-things-decode-data">
-    <p>Decode the payload using a Pilot Things decoder.</p>
+<script type="text/html" data-help-name="pilot-things-decode-data-cloud">
+    <p>Decode the payload using the cloud Pilot Things Sensor Library.</p>
     <h3>Inputs</h3>
     <dl class="message-properties">
         <dt>payload
-            <span class="property-type">{ timestamp?: number, data?: string | Buffer, metadata?: object, productId: string }</span>
+            <span class="property-type">{ data?: string | Buffer, productId: string }</span>
             <dd>
-                The data to decode and the ID of the source product.<br>
-                <b>Note:</b>
-                <ul>
-                    <li>Omitting <code>timestamp</code> will result in using the current time as timestamp.</li>
-                    <li>Omitting <code>data</code> will result in an empty payload being sent.</li>
-                </ul>
+                The data to decode and the ID of the source product (<a href="https://www.pilot-things.com/smart-platform/sensor-library" target="_blank">list here</a>).<br>
+                <b>Note:</b> Omitting <code>data</code> will result in an empty payload being sent.
             </dd>
         </dt>
     </dl>
     <h3>Properties</h3>
     <dl class="message-properties">
-        <dt>Pilot Things instance
-            <span class="property-type">URL</span>
-            <dd>
-                The address at which Pilot Things is installed.<br>
-                <b>Example:</b> <code>https://kerlink.pilot-things.com/</code>
-            </dd>
-        </dt>
-        <dt>Username
+        <dt>Sensor Library API key
             <span class="property-type">string</span>
-            <dd>The username used for authentication.</dd>
-        </dt>
-        <dt>Password
-            <span class="property-type">string</span>
-            <dd>The password used for authentication.</dd>
+            <dd>The token used for authentication. You received this when subscribing to the service.</dd>
         </dt>
         <dt>Data string format
             <span class="property-type">enum</span>

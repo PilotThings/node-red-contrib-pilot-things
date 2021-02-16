@@ -28,6 +28,24 @@ function dataStringToBuffer(data, format, done) {
     return Buffer.from(data, format);
 }
 
+function dataInputToString(data, dataStringFormat, done) {
+    if (data instanceof Buffer) {
+        return data.toString("hex");
+    } else if (typeHelpers.isString(data)) {
+        const dataBuf = dataStringToBuffer(data, dataStringFormat, done);
+        if (dataBuf) {
+            return dataBuf.toString("hex");
+        } else {
+            return undefined;
+        }
+    } else if (data === undefined) {
+        return "";
+    } else {
+        done("Invalid data");
+        return undefined;
+    }
+}
+
 function payloadToBody(payload, done, stringifyMetadata, dataStringFormat) {
     if (!typeHelpers.isObject(payload)) {
         done("Invalid payload");
@@ -47,19 +65,10 @@ function payloadToBody(payload, done, stringifyMetadata, dataStringFormat) {
         body.timestamp = new Date().getTime() / 1000;
     }
 
-    if (payload.data instanceof Buffer) {
-        body.body = payload.data.toString("hex");
-    } else if (typeHelpers.isString(payload.data)) {
-        const dataBuf = dataStringToBuffer(payload.data, dataStringFormat, done);
-        if (dataBuf) {
-            body.body = dataBuf.toString("hex");
-        } else {
-            return undefined;
-        }
-    } else if (payload.data === undefined) {
-        body.body = "";
+    const data = dataInputToString(payload.data, dataStringFormat, done);
+    if (data !== undefined) {
+        body.body = data;
     } else {
-        done("Invalid data");
         return undefined;
     }
 
@@ -75,4 +84,4 @@ function payloadToBody(payload, done, stringifyMetadata, dataStringFormat) {
     return body;
 }
 
-module.exports = { payloadToBody };
+module.exports = { payloadToBody, dataInputToString };

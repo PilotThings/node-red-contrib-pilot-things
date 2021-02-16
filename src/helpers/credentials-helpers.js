@@ -1,14 +1,14 @@
-const base64 = require("base-64");
 const crypto = require("crypto");
 
 function getAuthorizationHeader(credentials) {
-    return "Basic " + base64.encode(`${credentials.username || ""}:${credentials.password || ""}`);
+    return "Basic " + Buffer.from(`${credentials.username || ""}:${credentials.password || ""}`, "ascii").toString("base64");
 }
 
 function hashCredentials(credentials) {
     const hasher = crypto.createHash("sha256");
     hasher.update(credentials.username || "");
     hasher.update(credentials.password || "");
+    hasher.update(credentials.api_key || "");
     return hasher.digest();
 }
 
