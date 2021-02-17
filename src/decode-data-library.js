@@ -8,7 +8,7 @@ const typeHelpers = require("./helpers/type-helpers.js");
 
 const guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-async function decodeDataWithCloudCatalog(msg, node, config, send, done) {
+async function decodeDataWithLibrary(msg, node, config, send, done) {
     if (!(await credentialsHelpers.verifyAuthorizationTimeout(node.credentials, node.context()))) {
         done("Too many failed API call attempts. Make sure your API key is correct.");
         return;
@@ -27,7 +27,7 @@ async function decodeDataWithCloudCatalog(msg, node, config, send, done) {
     const result = await fetch("https://sensor-library.pilot-things.net/decode", {
         method: "POST",
         headers: {
-            "x-api-key": node.credentials.api_key,
+            "x-api-key": node.credentials.apikey,
             Accept: "application/json",
             "Content-Type": "application/json"
         },
@@ -51,18 +51,18 @@ async function decodeDataWithCloudCatalog(msg, node, config, send, done) {
 }
 
 module.exports = RED => {
-    function DecodeDataCloudNode(config) {
+    function DecodeDataLibraryNode(config) {
         RED.nodes.createNode(this, config);
 
         const node = this;
         node.on("input", (msg, send, done) => {
-            decodeDataWithCloudCatalog(msg, node, config, redHelpers.getSendHandler(node, send), redHelpers.getCompletionHandler(node, msg, done));
+            decodeDataWithLibrary(msg, node, config, redHelpers.getSendHandler(node, send), redHelpers.getCompletionHandler(node, msg, done));
         });
     }
 
-    RED.nodes.registerType("pilot-things-decode-data-cloud", DecodeDataCloudNode, {
+    RED.nodes.registerType("pilot-things-decode-data-library", DecodeDataLibraryNode, {
         credentials: {
-            api_key: { type: "password" }
+            apikey: { type: "text" }
         }
     });
 }

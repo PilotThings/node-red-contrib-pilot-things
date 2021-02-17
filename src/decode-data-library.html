@@ -1,8 +1,8 @@
 <script type="text/javascript" src="/pilot-things.js"></script>
 <script type="text/javascript">
-    var pilotThingsDecodeDataCloud = "Sensor Library decode data";
+    var pilotThingsDecodeDataLibrary = "decode library";
 
-    RED.nodes.registerType("pilot-things-decode-data-cloud", {
+    RED.nodes.registerType("pilot-things-decode-data-library", {
         category: pilotThingsNodeCategory,
         color: pilotThingsNodeColor,
         defaults: {
@@ -10,18 +10,18 @@
             name: { value: "" }
         },
         credentials: {
-            api_key: { type: "text" }
+            apikey: { type: "text" }
         },
         inputs: 1,
         outputs: 1,
         icon: pilotThingsIcon,
-        paletteLabel: pilotThingsDecodeDataCloud,
-        label: pilotThingsNameOr(pilotThingsDecodeDataCloud),
+        paletteLabel: pilotThingsDecodeDataLibrary,
+        label: pilotThingsNameOr(pilotThingsDecodeDataLibrary),
         labelStyle: pilotThingsItalicIfName
     });
 </script>
 
-<script type="text/html" data-template-name="pilot-things-decode-data-cloud">
+<script type="text/html" data-template-name="pilot-things-decode-data-library">
     <style>
         .pilot-things-label {
             width: 166px !important;
@@ -32,8 +32,8 @@
         }
     </style>
     <div class="form-row">
-        <label for="node-input-api_key" class="pilot-things-label"><i class="fa fa-lock"></i> Sensor Library API key</label>
-        <input type="text" id="node-input-api_key" class="pilot-things-input">
+        <label for="node-input-apikey" class="pilot-things-label"><i class="fa fa-lock"></i> Sensor Library API key</label>
+        <input type="text" id="node-input-apikey" class="pilot-things-input" required>
     </div>
     <div class="form-row">
         <label for="node-input-format" class="pilot-things-label"><i class="fa fa-file"></i> Data string format</label>
@@ -49,7 +49,7 @@
     </div>
 </script>
 
-<script type="text/html" data-help-name="pilot-things-decode-data-cloud">
+<script type="text/html" data-help-name="pilot-things-decode-data-library">
     <p>Decode the payload using the cloud Pilot Things Sensor Library.</p>
     <h3>Inputs</h3>
     <dl class="message-properties">

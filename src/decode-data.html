@@ -1,6 +1,6 @@
 <script type="text/javascript" src="/pilot-things.js"></script>
 <script type="text/javascript">
-    var pilotThingsDecodeData = "Pilot Things decode data";
+    var pilotThingsDecodeData = "decode studio";
 
     RED.nodes.registerType("pilot-things-decode-data", {
         category: pilotThingsNodeCategory,
@@ -35,7 +35,7 @@
     </style>
     <div class="form-row">
         <label for="node-input-endpoint" class="pilot-things-label"><i class="fa fa-globe"></i> Pilot Things instance</label>
-        <input type="text" id="node-input-endpoint" class="pilot-things-input">
+        <input type="text" id="node-input-endpoint" class="pilot-things-input" required>
     </div>
     <div class="form-row">
         <label for="node-input-username" class="pilot-things-label"><i class="fa fa-user"></i> Username</label>
@@ -60,7 +60,7 @@
 </script>
 
 <script type="text/html" data-help-name="pilot-things-decode-data">
-    <p>Decode the payload using a Pilot Things decoder.</p>
+    <p>Decode the payload using a Pilot Things Studio decoder.</p>
     <h3>Inputs</h3>
     <dl class="message-properties">
         <dt>payload

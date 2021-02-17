@@ -22,13 +22,20 @@ Either use the Menu - Manage palette option or run the following command in your
 
 ## Send node usage
 
-This node sends data to Pilot Things. Pilot Things will automatically create the sensors, and can decode the data after associating the sensor to a product.
+> **Note:** This node is only available for [Pilot Things Studio](https://www.pilot-things.com/smart-platform/studio) customers
+
+This node sends data to Pilot Things Studio. Pilot Things will automatically create the sensors, and can decode the data after associating the sensor to a product.
 
 This node can be used in a [Kerlink Gateway with SPN](https://www.kerlink.com/iot-portfolio-and-technologies/connectivity-management/wanesy-small-private-network/).
 
 See node help for more details.
 
 ## Decode node usage
+
+> **Note:** There are two nodes available
+> - `decode library` is for [Sensor Library](https://www.pilot-things.com/smart-platform/sensor-library) customers
+>   - With this node timestamp and metadata cannot be provided, only data and product ID.
+> - `decode studio` is for [Pilot Things Studio](https://www.pilot-things.com/smart-platform/studio) customers
 
 The decode node decodes sensor payload to convert it to measurements. You must use a product ID that is a sensor unique ID. For instance product `e6ae04f9-5f57-4992-8bda-41ae5ff0bf8d` is an [Adeunis LoRaWAN Field Test](https://www.adeunis.com/produit/ftd-testeur-de-reseau/). [A full list is available here.](https://www.pilot-things.com/smart-platform/sensor-library)
 

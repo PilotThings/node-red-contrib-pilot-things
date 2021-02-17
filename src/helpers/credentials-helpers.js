@@ -8,7 +8,7 @@ function hashCredentials(credentials) {
     const hasher = crypto.createHash("sha256");
     hasher.update(credentials.username || "");
     hasher.update(credentials.password || "");
-    hasher.update(credentials.api_key || "");
+    hasher.update(credentials.apikey || "");
     return hasher.digest();
 }
 

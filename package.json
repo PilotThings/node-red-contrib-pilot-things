@@ -1,6 +1,6 @@
 {
     "name": "@pilot-things/node-red-contrib-pilot-things",
-    "version": "1.4.1",
+    "version": "1.5.0",
     "description": "Provides Node-RED nodes for Pilot Things interoperability",
     "author": "Charles Milette",
     "repository": "https://github.com/PilotThings/node-red-contrib-pilot-things",
@@ -17,7 +17,7 @@
     "node-red": {
         "nodes": {
             "pilot-things-decode-data": "src/decode-data.js",
-            "pilot-things-decode-data-cloud": "src/decode-data-cloud.js",
+            "pilot-things-decode-data-library": "src/decode-data-library.js",
             "pilot-things-send-data": "src/send-data.js"
         }
     },
